@@ -15,7 +15,7 @@ mongoose
     useNewUrlParser: true,
   })
   .then(() => console.log("Successfully connected DB"))
-  .catch((err) => console.log("X Failed connected DB X"))
+  .catch((err) => console.log("Failed connected DB"))
 
 app.listen(port, () => {
   console.log(`App running on port http:localhost:${port}`)
