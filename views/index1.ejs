@@ -27,7 +27,7 @@
             <div class="main__section">
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" href="localhost">
                             <img src="images/Rectangle 62.png" alt="">
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,12 +71,12 @@
                     <div class="cars">
                         <ul class="navbar-nav flex-grow-1 pt-2 text-left">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="/">
                                     <p>CARS</p>
                                 </a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="/">
                                     <p>List Car</p>
                                 </a>
                             </li>
@@ -115,34 +115,37 @@
                                                         <h5 class="card-title h5__hari">Rp
                                                             <%= car.price %> / hari</h5>
                                                         <div class="row mt-3">
-                                                            <p class="p__date"><img src="images/fi_clock.png" height="18px" class="pe-1" alt=""> Updated at
-                                                                10 Februari 2023
+                                                            <p class="p__date"><img src="images/fi_clock.png" height="18px" class="pe-1" alt="">Updated at <%= car.updateDateTime%>
                                                             </p>
                                                         </div>
         
                                                         <div class="d-flex">
-                                                            <button class="btn btn__danger me-2 btn__modal" style="width: 143.5px; " data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="id"><img class="pe-2" src="images/fi_trash-2.png" alt="">Delete</button>
+                                                            <button class="btn btn__danger me-2 btn__modal" style="width: 143.5px; " data-bs-toggle="modal" data-bs-target="#exampleModal_<%= car.id %>" data-id="<%= car.id %>"><img class="pe-2" src="images/fi_trash-2.png" alt="">Delete</button>
+
                                                             <a class="btn btn__success" href="/edit/<%= car.id %>" style="width: 143.5px;"><img class="pe-2" src="images/fi_edit.png" alt="">Edit</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                              
                                             </div>
-                                            <% }) %>
+                                            
                                         <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModal_<%= car.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content d-flex flex-column justify-content-center align-items-center text-center">
                                                     <img src="images/img-BeepBeep.png" alt="">
                                                     <h2>Menghapus Data Mobil</h2>
                                                     <p>Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin ingin menghapus?</p>
                                                     <div class="button__modal d-flex">
-                                                        <a href="/delete/" class="btn btn__primary btn__delete me-2">Ya</a>
+
+                                                        <a href="/delete/<%= car.id %>" class="btn btn__primary btn__delete me-2">Ya</a>
+                                                        
                                                         <button class="btn btn__secondary" data-bs-dismiss="modal" aria-label="Close">Tidak</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <% }) %>
                                 </div>
 
                         </div>

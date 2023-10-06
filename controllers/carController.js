@@ -1,4 +1,5 @@
 const Car = require("../models/carModel")
+const moment = require("moment")
 
 // view page - list cars
 const pageCars = async (req, res) => {
@@ -6,7 +7,6 @@ const pageCars = async (req, res) => {
     const { price, name, category } = req.query
 
     const condition = {}
-    if (price) condition.price = { $gt: req.query.price }
     if (name)
       condition.name = {
         $regex: ".*" + name.toLowerCase() + ".*",
@@ -15,9 +15,13 @@ const pageCars = async (req, res) => {
 
     const cars = await Car.find().where(condition)
 
-    res.render("index1", {
+    cars.forEach((car) => {
+      car.updateDateTime = moment(car.updatedAt).format("DD MMM YYYY, HH:mm")
+    })
+
+    res.render("index1.ejs", {
       title: "List Cars",
-      message: req.flash("message", ""),
+      message: req.flash("message"),
       cars,
     })
   } catch (err) {
@@ -39,7 +43,7 @@ const pageAddCar = (req, res) => {
 const createCar = async (req, res) => {
   try {
     await Car.create(req.body)
-    req.flash("message", "Data Berhasil Ditambahkan")
+    req.flash("message", "Ditambahkan")
     res.redirect("/")
   } catch (err) {
     console.log(err)
@@ -66,6 +70,21 @@ const pageEdit = async (req, res) => {
   }
 }
 
+// action delete
+const deleteCar = async (req, res) => {
+  try {
+    const id = req.params.id
+    await Car.findByIdAndDelete(id)
+    req.flash("message", "Dihapus")
+    res.redirect("/")
+  } catch (err) {
+    res.status(400).json({
+      status: "failed",
+      message: err.message,
+    })
+  }
+}
+
 // action update
 
 module.exports = {
@@ -73,4 +92,5 @@ module.exports = {
   pageAddCar,
   createCar,
   pageEdit,
+  deleteCar,
 }
