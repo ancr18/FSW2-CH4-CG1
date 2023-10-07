@@ -77,7 +77,7 @@ const createCar = async (req, res) => {
 
     await Car.create({ name, price, category, imageUrl: img.url })
     req.flash("message", "Ditambahkan")
-    res.redirect("/cars")
+    res.redirect("/dashboard")
   } catch (err) {
     console.log(err)
     res.status(400).json({
@@ -93,7 +93,7 @@ const deleteCar = async (req, res) => {
     const id = req.params.id
     await Car.findByIdAndDelete(id)
     req.flash("message", "Dihapus")
-    res.redirect("/cars")
+    res.redirect("/dashboard")
   } catch (err) {
     res.status(400).json({
       status: "failed",
@@ -124,7 +124,7 @@ const updateCar = async (req, res) => {
       { new: true }
     )
     req.flash("message", "Diperbarui")
-    res.redirect("/cars")
+    res.redirect("/dashboard")
   } catch (err) {
     res.status(400).json({
       status: "failed",
