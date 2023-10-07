@@ -121,10 +121,9 @@
                                                 </div>
                                                 <div class="col-lg-8">
                                                     <select name="category" class="form-select" aria-label="Default select example">
-                                                        <option value="<%= car.category %>" selected><%= car.category %></option>
-                                                        <option value="small">Small</option>
-                                                        <option value="medium">Medium</option>
-                                                        <option value="large">Large</option>
+                                                        <option value="small" <% if (car.category === 'small') { %>selected<% } %> >Small</option>
+                                                        <option value="medium" <% if (car.category === 'medium') { %>selected<% } %>>Medium</option>
+                                                        <option value="large" <% if (car.category === 'large') { %>selected<% } %>>Large</option>
                                                       </select>
                                                 </div>
                                             </div>

@@ -5,12 +5,12 @@ const imagekit = require("../lib/imagekit")
 // view page - list cars
 const pageCars = async (req, res) => {
   try {
-    const { search, category } = req.query
+    const { name, category } = req.query
 
     const condition = {}
-    if (search)
-      condition.search = {
-        $regex: ".*" + search.toLowerCase() + ".*",
+    if (name)
+      condition.name = {
+        $regex: ".*" + name.toLowerCase() + ".*",
         $options: "i",
       }
     if (category)
