@@ -14,10 +14,12 @@ const carSchema = new mongoose.Schema(
       type: String,
       required: [true, "Size is required"],
     },
-    // image: {
-    //   type: String,
-    //   required: [true, "Image is required"],
-    // },
+    imageUrl: {
+      type: String,
+      required: [true, "Image is required"],
+      default:
+        "https://tse2.mm.bing.net/th?id=OIP.U2iQ7wNK6ZzTW_traW_-PQHaHa&pid=Api&P=0&h=180",
+    },
   },
   {
     timestamps: true,

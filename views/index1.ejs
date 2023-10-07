@@ -43,7 +43,7 @@
                             </ul>
                             <div class="d-flex ">
                                 <form class="d-flex" role="search">
-                                    <input class="form-control " type="search" placeholder="Search" aria-label="Search">
+                                    <input class="form-control " type="search" placeholder="Search Name" aria-label="Search" name="search">
                                     <button class="btn btn-outline-success" type="submit">Search</button>
                                 </form>
                                 <ul class="navbar-nav dropdown__profile">
@@ -107,7 +107,7 @@
                                     <% cars.map(car => { %>
                                         <div class="col-lg-4 my-2">
                                                 <div class="card px-2 py-4">
-                                                    <img height="222px" src="<%= car.image %>" class="card-img-top text-center" style="aspect-ratio: 2/1; object-fit: contain;">
+                                                    <img height="222px" src="<%= car.imageUrl %>" class="card-img-top text-center" style="aspect-ratio: 2/1; object-fit: contain;">
                                                     <div class="card-body">
                                                         <h5 class="card- title h5__tipe">
                                                             <%= car.name %>
@@ -120,6 +120,7 @@
                                                         </div>
         
                                                         <div class="d-flex">
+
                                                             <button class="btn btn__danger me-2 btn__modal" style="width: 143.5px; " data-bs-toggle="modal" data-bs-target="#exampleModal_<%= car.id %>" data-id="<%= car.id %>"><img class="pe-2" src="images/fi_trash-2.png" alt="">Delete</button>
 
                                                             <a class="btn btn__success" href="/edit/<%= car.id %>" style="width: 143.5px;"><img class="pe-2" src="images/fi_edit.png" alt="">Edit</a>
@@ -137,7 +138,7 @@
                                                     <h2>Menghapus Data Mobil</h2>
                                                     <p>Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin ingin menghapus?</p>
                                                     <div class="button__modal d-flex">
-
+                                                        
                                                         <a href="/delete/<%= car.id %>" class="btn btn__primary btn__delete me-2">Ya</a>
                                                         
                                                         <button class="btn btn__secondary" data-bs-dismiss="modal" aria-label="Close">Tidak</button>

@@ -4,10 +4,10 @@ const flash = require("connect-flash")
 const session = require("express-session")
 const morgan = require("morgan")
 const cookieParser = require("cookie-parser")
+const multer = require("multer")
 
 // LOCAL MODULS
 const carRoutes = require("./routes/carRoutes")
-
 const app = express()
 
 // MIDDLEWARE

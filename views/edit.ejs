@@ -40,7 +40,7 @@
                                 </li>
                             </ul>
                             <div class="d-flex ">
-                                <form class="d-flex" role="search">
+                                <form class="d-flex" role="search" method="POST">
                                     <input class="form-control " type="search" placeholder="Search" aria-label="Search">
                                     <button class="btn btn-outline-success" type="submit">Search</button>
                                 </form>
@@ -95,7 +95,7 @@
                                 </h5>
                             </div>
 
-                            <form action="" method="post">
+                            <form action="/update/<%= car.id %>" method="post" enctype="multipart/form-data">
                                 <div class="bg__white mt-2">
                                     <div class="row">
                                         <div class="col-lg-6">
@@ -133,7 +133,7 @@
                                                     <p>Foto<i style="color: #FA2C5A;">*</i></p>
                                                 </div>
                                                 <div class="col-lg-8">
-                                                    <input name="image" class="form-control" type="file" id="formFile" value="">
+                                                    <input name="image" class="form-control" type="file" id="formFile" value="<%= car.imageUrl %>">
                                                     <small>File size max. 2MB</small>
                                                 </div>
                                             </div>

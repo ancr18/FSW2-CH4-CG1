@@ -1,17 +1,23 @@
 const Car = require("../models/carModel")
 const moment = require("moment")
+const imagekit = require("../lib/imagekit")
 
 // view page - list cars
 const pageCars = async (req, res) => {
   try {
-    const { price, name, category } = req.query
+    const { search, category } = req.query
 
     const condition = {}
-    if (name)
-      condition.name = {
-        $regex: ".*" + name.toLowerCase() + ".*",
+    if (search)
+      condition.search = {
+        $regex: ".*" + search.toLowerCase() + ".*",
+        $options: "i",
       }
-    if (category) condition.category = { $regex: req.query.category }
+    if (category)
+      condition.category = {
+        $regex: category,
+        $options: "i",
+      }
 
     const cars = await Car.find().where(condition)
 
@@ -39,21 +45,6 @@ const pageAddCar = (req, res) => {
   })
 }
 
-// action create new car
-const createCar = async (req, res) => {
-  try {
-    await Car.create(req.body)
-    req.flash("message", "Ditambahkan")
-    res.redirect("/")
-  } catch (err) {
-    console.log(err)
-    res.status(400).json({
-      status: "failed",
-      message: err.message,
-    })
-  }
-}
-
 // view page edit
 const pageEdit = async (req, res) => {
   try {
@@ -63,6 +54,32 @@ const pageEdit = async (req, res) => {
       car,
     })
   } catch (err) {
+    res.status(400).json({
+      status: "failed",
+      message: err.message,
+    })
+  }
+}
+
+// action create new car
+const createCar = async (req, res) => {
+  const { name, price, category } = req.body
+  const file = req.file
+
+  try {
+    const split = file.originalname.split(".")
+    const extension = split[split.length - 1]
+
+    const img = await imagekit.upload({
+      file: file.buffer,
+      fileName: `IMG-${Date.now()}.${extension}`,
+    })
+
+    await Car.create({ name, price, category, imageUrl: img.url })
+    req.flash("message", "Ditambahkan")
+    res.redirect("/")
+  } catch (err) {
+    console.log(err)
     res.status(400).json({
       status: "failed",
       message: err.message,
@@ -86,6 +103,35 @@ const deleteCar = async (req, res) => {
 }
 
 // action update
+const updateCar = async (req, res) => {
+  const { name, price, category } = req.body
+  const file = req.file
+
+  try {
+    const split = file.originalname.split(".")
+    const extension = split[split.length - 1]
+
+    const img = await imagekit.upload({
+      file: file.buffer,
+      fileName: `IMG-${Date.now()}.${extension}`,
+    })
+
+    const id = req.params.id
+
+    await Car.findByIdAndUpdate(
+      id,
+      { name, price, category, imageUrl: img.url },
+      { new: true }
+    )
+    req.flash("message", "Diperbarui")
+    res.redirect("/")
+  } catch (err) {
+    res.status(400).json({
+      status: "failed",
+      message: err.message,
+    })
+  }
+}
 
 module.exports = {
   pageCars,
@@ -93,4 +139,5 @@ module.exports = {
   createCar,
   pageEdit,
   deleteCar,
+  updateCar,
 }
