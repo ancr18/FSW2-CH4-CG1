@@ -17,7 +17,7 @@
                         </a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/">
+                        <a class="nav-link" href="/cars">
                             <img src="images/fi_truck.png" alt="">
                             <p>Cars</p>
                         </a>
@@ -71,12 +71,12 @@
                     <div class="cars">
                         <ul class="navbar-nav flex-grow-1 pt-2 text-left">
                             <li class="nav-item">
-                                <a class="nav-link" href="/">
+                                <a class="nav-link" href="/cars">
                                     <p>CARS</p>
                                 </a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="/">
+                                <a class="nav-link" href="/cars">
                                     <p>List Car</p>
                                 </a>
                             </li>
@@ -97,11 +97,11 @@
                                 <h5>
                                     List Cars
                                 </h5>
-                                <a class="btn btn__primary" href="/create"> <img src="images/fi_plus.png" alt=""> Add New Car</a>
+                                <a class="btn btn__primary" href="/cars/create"> <img src="images/fi_plus.png" alt=""> Add New Car</a>
                             </div>
 
                             <div class="d-flex button__group">
-                                <a href="/" class="btn button__secondary me-3">All</a>
+                                <a href="/cars" class="btn button__secondary me-3">All</a>
                                 <a href="?category=small" class="btn button__secondary me-3">Small</a>
                                 <a href="?category=medium" class="btn button__secondary me-3">Medium</a>
                                 <a href="?category=large" class="btn button__secondary me-3">Large</a>
@@ -128,7 +128,7 @@
 
                                                             <button class="btn btn__danger me-2 btn__modal" style="width: 143.5px; " data-bs-toggle="modal" data-bs-target="#exampleModal_<%= car.id %>" data-id="<%= car.id %>"><img class="pe-2" src="images/fi_trash-2.png" alt="">Delete</button>
 
-                                                            <a class="btn btn__success" href="/edit/<%= car.id %>" style="width: 143.5px;"><img class="pe-2" src="images/fi_edit.png" alt="">Edit</a>
+                                                            <a class="btn btn__success" href="/cars/edit/<%= car.id %>" style="width: 143.5px;"><img class="pe-2" src="images/fi_edit.png" alt="">Edit</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -144,7 +144,7 @@
                                                     <p>Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin ingin menghapus?</p>
                                                     <div class="button__modal d-flex">
                                                         
-                                                        <a href="/delete/<%= car.id %>" class="btn btn__primary btn__delete me-2">Ya</a>
+                                                        <a href="/cars/delete/<%= car.id %>" class="btn btn__primary btn__delete me-2">Ya</a>
                                                         
                                                         <button class="btn btn__secondary" data-bs-dismiss="modal" aria-label="Close">Tidak</button>
                                                     </div>
@@ -168,7 +168,7 @@
         modals.forEach((modal) => {
             modal.addEventListener('click', e => {
                 const id = modal.getAttribute('data-id')
-                trigger.href = `/delete/${id}`
+                trigger.href = `/cars/delete/${id}`
             })
         })
     </script>
