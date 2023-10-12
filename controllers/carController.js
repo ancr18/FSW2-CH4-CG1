@@ -67,13 +67,15 @@ const createCar = async (req, res) => {
   const file = req.file
 
   try {
-    const split = file.originalname.split(".")
-    const extension = split[split.length - 1]
+    if (file) {
+      const split = file.originalname.split(".")
+      const extension = split[split.length - 1]
 
-    const img = await imagekit.upload({
-      file: file.buffer,
-      fileName: `IMG-${Date.now()}.${extension}`,
-    })
+      const img = await imagekit.upload({
+        file: file.buffer,
+        fileName: `IMG-${Date.now()}.${extension}`,
+      })
+    }
 
     await Car.create({ name, price, category, imageUrl: img.url })
     req.flash("message", "Ditambahkan")
@@ -108,13 +110,15 @@ const updateCar = async (req, res) => {
   const file = req.file
 
   try {
-    const split = file.originalname.split(".")
-    const extension = split[split.length - 1]
+    if (file) {
+      const split = file.originalname.split(".")
+      const extension = split[split.length - 1]
 
-    const img = await imagekit.upload({
-      file: file.buffer,
-      fileName: `IMG-${Date.now()}.${extension}`,
-    })
+      const img = await imagekit.upload({
+        file: file.buffer,
+        fileName: `IMG-${Date.now()}.${extension}`,
+      })
+    }
 
     const id = req.params.id
 
